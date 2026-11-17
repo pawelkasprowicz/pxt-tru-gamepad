@@ -1,6 +1,6 @@
 {
     "name": "pxt-tru-gamepad",
-    "description": "",
+    "description": "TRU COMPONENTS gamepad extension with 7 buttons, analog joystick and differential motor control for micro:bit V2",
     "dependencies": {
         "core": "*",
         "radio": "*",

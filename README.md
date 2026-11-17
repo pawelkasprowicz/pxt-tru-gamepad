@@ -1,24 +1,89 @@
+# TRU COMPONENTS Gamepad for micro:bit V2
 
-> Otwórz tę stronę na [https://pawelkasprowicz.github.io/pxt-tru-gamepad/](https://pawelkasprowicz.github.io/pxt-tru-gamepad/)
+MakeCode extension for controlling a TRU COMPONENTS gamepad using BBC micro:bit V2.
 
-## Użyj jako rozszerzenia
+The extension supports seven digital buttons, a two-axis analog joystick, and differential motor control calculations.
 
-To repozytorium można dodać jako **rozszerzenie** w MakeCode.
+## Features
 
-* otwórz [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* kliknij na **Nowy Projekt**
-* kliknij **Rozszerzenia** w menu oznaczonym kołem zębatym
-* szukaj **https://github.com/pawelkasprowicz/pxt-tru-gamepad** i importuj
+- 7 digital buttons: UP, DOWN, LEFT, RIGHT, MODE, SELECT, Z
+- Button press detection with software debouncing
+- Analog joystick X and Y readings
+- Joystick position as raw ADC values or percentages
+- Adjustable joystick dead zone
+- Differential drive calculations for two motors
+- Motor speed and direction calculations
+- Maximum motor speed configuration
 
-## Edytuj ten projekt
+## Hardware connections
 
-Aby edytować to repozytorium w MakeCode.
+Connect the gamepad to micro:bit V2 as follows:
 
-* otwórz [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* kliknij **Importuj**, a następnie **Importuj URL**
-* wklej **https://github.com/pawelkasprowicz/pxt-tru-gamepad** i kliknij importuj
+| Gamepad signal | micro:bit pin |
+|---|---|
+| UP | P10 |
+| DOWN | P8 |
+| LEFT | P11 |
+| RIGHT | P9 |
+| MODE | P6 |
+| SELECT | P7 |
+| Z (joystick button) | P5 |
+| Joystick X | P3 |
+| Joystick Y | P4 |
+| GND | GND |
+| Power | 3V |
 
-#### Metadane (używane do wyszukiwania, renderowania)
+The digital buttons are active-low and require appropriate pull-up resistors.
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+**Important:** The extension disables the micro:bit LED matrix because several gamepad connections use shared pins.
+
+## Installation
+
+1. Open Microsoft MakeCode for micro:bit.
+2. Create a new project.
+3. Select **Extensions**.
+4. Enter the repository address:
+
+   `https://github.com/pawelkasprowicz/pxt-tru-gamepad`
+
+5. Select the extension to add it to your project.
+
+## Button example
+
+```typescript
+truGamepad.init()
+
+truGamepad.onButtonPressed(truGamepad.Button.UP, function () {
+    serial.writeLine("UP pressed")
+})
+
+truGamepad.onButtonPressed(truGamepad.Button.Z, function () {
+    serial.writeLine("Joystick button pressed")
+})
+```
+
+## Analog joystick
+
+The joystick uses two analog inputs:
+
+- X axis: P3
+- Y axis: P4
+
+The extension supports raw ADC readings and normalized joystick positions.
+
+The joystick center is approximately 512 ADC units.
+
+A configurable dead zone helps prevent unwanted movement around the center position.
+
+## Differential motor control
+
+The extension includes calculations for controlling two motors using a single joystick.
+
+Motor assignment:
+
+- M1: left motor
+- M2: right motor
+
+Movement:
+
+| Joystick movement |
