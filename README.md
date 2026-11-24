@@ -4,6 +4,14 @@ MakeCode extension for controlling a TRU COMPONENTS gamepad using BBC micro:bit 
 
 The extension supports seven digital buttons, a two-axis analog joystick, and differential motor control calculations.
 
+<p align="center">
+  <img src="TRU%20COMPONENTS%20Gamepad.jpg" width="450" alt="TRU COMPONENTS Gamepad">
+</p>
+
+<p align="center">
+  <b>TRU COMPONENTS Gamepad</b>
+</p>
+
 ## Features
 
 - 7 digital buttons: UP, DOWN, LEFT, RIGHT, MODE, SELECT, Z
@@ -87,7 +95,7 @@ The joystick uses two analog inputs:
 
 The extension supports:
 
-- Raw ADC readings (0–1023)
+- Raw ADC readings (0-1023)
 - Normalized joystick positions (-100% to +100%)
 - Adjustable dead zone
 
@@ -105,7 +113,7 @@ The joystick center is approximately 512 ADC units.
 
 A configurable dead zone helps prevent unwanted movement around the center position.
 
-The default dead zone used during testing was 10%.
+The dead zone used during testing was 10%.
 
 ## Differential motor control
 
@@ -152,7 +160,7 @@ Signed motor speed:
 Unsigned motor speed:
 
 ```text
-0–255
+0-255
 ```
 
 Motor direction can be determined separately from the speed value.
